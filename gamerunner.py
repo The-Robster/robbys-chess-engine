@@ -14,8 +14,8 @@ def await_user_move(board):
 
 def await_move(whites_move, board):
     move = None
-    if(whites_move == is_white):
-        move = find_next_move(board)
+    if(whites_move == robbysengine.my_color):
+        move = robbysengine.find_next_move(board)
     else:
         move = await_user_move(board)
 
@@ -26,20 +26,22 @@ def await_move(whites_move, board):
 
 def execeute_turn(board):
 
-    time.sleep(1)
+    delay = .1
+
+    time.sleep(delay)
     print("White's move:")
-    time.sleep(1)
+    time.sleep(delay)
     if await_move(True, board) == None: return
 
-    time.sleep(1)
+    time.sleep(delay)
     print("Black's move:")
-    time.sleep(1)
+    time.sleep(delay)
     if await_move(False, board) == None: return
 
     execeute_turn(board)
 
-is_white = False
-if(is_white): print("I'll play White")
+robbysengine.my_color = chess.BLACK
+if(robbysengine.my_color): print("I'll play White")
 else: print("I'll play Black")
 
 execeute_turn(chess.Board())
